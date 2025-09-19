@@ -1,0 +1,98 @@
+---Ghost Gui UI Library
+loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/UI-Library/refs/heads/main/Ghost%20Gui'))()
+game.CoreGui.GhostGui.MainFrame.Title.Text = "Zombie Survival V0.1"
+---
+
+AddContent("Toogle", "Auto Kill Use UZI", [[
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+
+-- Hàm bắn
+local function HitTarget(tool, part, humanoid, dmg, mat, sid)
+    if tool and part and humanoid then
+        local args = {
+            tool,
+            {
+                p = part.Position,
+                pid = 1,
+                part = part,
+                d = dmg,
+                maxDist = 999,
+                h = humanoid,
+                m = mat,
+                n = Vector3.new(0,1,0),
+                t = tick(),
+                sid = sid
+            }
+        }
+        ReplicatedStorage:WaitForChild("WeaponsSystem"):WaitForChild("Network"):WaitForChild("WeaponHit"):FireServer(unpack(args))
+    end
+end
+
+-- AutoZombie loop
+task.spawn(function()
+    while task.wait(0.05) do
+        local folder = workspace:FindFirstChild("ZombiesAlive")
+        if folder then
+            for _, z in ipairs(folder:GetChildren()) do
+                local hum = z:FindFirstChildOfClass("Humanoid")
+                local part = z:FindFirstChild("Left Leg") or z:FindFirstChildWhichIsA("BasePart")
+                HitTarget(LocalPlayer.Character:FindFirstChild("Uzi"), part, hum, 5, Enum.Material.Plastic, 39)
+            end
+        end
+    end
+end)
+
+-- AutoWolf loop
+task.spawn(function()
+    while task.wait(0.05) do
+        local wolf = workspace:FindFirstChild("WolfModel")
+        if wolf then
+            local hum = wolf:FindFirstChildOfClass("Humanoid")
+            local part = wolf:FindFirstChild("LowerTorso") or wolf:FindFirstChildWhichIsA("BasePart")
+            HitTarget(LocalPlayer.Character:FindFirstChild("Uzi"), part, hum, 15, Enum.Material.Leather, 6)
+        end
+    end
+end)
+]])
+
+AddContent("Toogle", "Anti Kick", [[
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- AntiKick
+local mt = getrawmetatable(game)
+setreadonly(mt, false)
+local oldNamecall = mt.__namecall
+mt.__namecall = newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    if method == "Kick" or method == "kick" then
+        warn("⚠️ Kick Blocked!")
+        return nil
+    end
+    return oldNamecall(self, ...)
+end)
+
+-- AntiAFK
+for _, c in pairs(getconnections(LocalPlayer.Idled)) do
+    c:Disable()
+end
+LocalPlayer.Idled:Connect(function()
+    game:GetService("VirtualUser"):CaptureController()
+    game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+]])
+
+AddContent("TextButton", "TP RawMeat", [[
+local meat = workspace:FindFirstChild("RawMeatModel")
+if meat then
+    local part = meat:FindFirstChildWhichIsA("BasePart")
+    if part then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+            LocalPlayer.Character:PivotTo(part.CFrame + Vector3.new(0,5,0))
+        end
+    end
+Here
+]])
+
