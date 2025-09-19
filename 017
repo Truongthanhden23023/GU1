@@ -79,16 +79,30 @@ end
 
 AddContent("TextButton", "TP Coin", [[
 local LocalPlayer = game:GetService("Players").LocalPlayer
-local map = workspace:FindFirstChild("Map") or workspace
+local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
 
-for _, obj in ipairs(map:GetChildren()) do
-    if obj.Name:match("^Coin_Spawn") then  -- tìm tất cả object bắt đầu bằng "Coin_Spawn"
+for _, obj in ipairs(workspace:GetChildren()) do
+    if obj.Name:match("^Coin_Spawn") then
         local part = obj:FindFirstChildWhichIsA("BasePart") or obj
-        if part and LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
-            -- Teleport
-            LocalPlayer.Character:PivotTo(part.CFrame + Vector3.new(0,5,0))
-            task.wait(0.3) -- chờ một chút trước khi qua Coin_Spawn tiếp theo
+        if part then
+            hrp.CFrame = part.CFrame + Vector3.new(0,5,0)
         end
     end
-end
+end 
+]])
+
+AddContent("TextButton", "TP Potion", [[
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+for _, obj in ipairs(workspace:GetChildren()) do
+    if obj.Name:match("^Potion_Spawn") then
+        local part = obj:FindFirstChildWhichIsA("BasePart") or obj
+        if part then
+            hrp.CFrame = part.CFrame + Vector3.new(0,5,0)
+        end
+    end
+end 
 ]])
