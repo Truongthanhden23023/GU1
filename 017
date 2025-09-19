@@ -143,4 +143,5 @@ if treePart then
     hrp.CFrame = treePart.CFrame + Vector3.new(0,5,0)
 else
     warn("❌ Không tìm thấy TreePart trong workspace")
-endkspace
+end
+]])
