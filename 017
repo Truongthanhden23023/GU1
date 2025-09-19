@@ -1,4 +1,4 @@
-meat Gui UI Library
+-- Ghost Gui UI Library
 loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/UI-Library/refs/heads/main/Ghost%20Gui'))()
 game.CoreGui.GhostGui.MainFrame.Title.Text = "Zombie Survival V0.1"
 ---
