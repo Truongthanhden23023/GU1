@@ -78,7 +78,7 @@ end
 ]])
 
 AddContent("TextButton", "TP Coin", [[
-local coin = workspace:FindFirstChild("Coin_Spawn")
+local coin = workspace:FindFirstChild("Coin_Spawn%d+")
 if meat then
     local part = coin:FindFirstChildWhichIsA("BasePart")
     if part then
