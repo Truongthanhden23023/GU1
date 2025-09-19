@@ -126,3 +126,21 @@ for _, obj in ipairs(workspace:GetChildren()) do
 end 
 ]])
 
+AddContent("TextButton", "TP Tree", [[
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+local treePart
+for _, obj in ipairs(workspace:GetDescendants()) do
+    if obj.Name == "TreePart" and obj:IsA("BasePart") then
+        treePart = obj
+        break
+    end
+end
+
+if treePart then
+    hrp.CFrame = treePart.CFrame + Vector3.new(0,5,0)
+else
+    warn("❌ Không tìm thấy TreePart trong workspace")
+endkspace
