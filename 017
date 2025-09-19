@@ -78,13 +78,16 @@ end
 ]])
 
 AddContent("TextButton", "TP Coin", [[
-local coin = workspace:FindFirstChild("Coin_Spawn%d+")
-if meat then
-    local part = coin:FindFirstChildWhichIsA("BasePart")
-    if part then
-        local LocalPlayer = game:GetService("Players").LocalPlayer
-        if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local map = workspace:FindFirstChild("Map") or workspace
+
+for _, obj in ipairs(map:GetChildren()) do
+    if obj.Name:match("^Coin_Spawn") then  -- tìm tất cả object bắt đầu bằng "Coin_Spawn"
+        local part = obj:FindFirstChildWhichIsA("BasePart") or obj
+        if part and LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+            -- Teleport
             LocalPlayer.Character:PivotTo(part.CFrame + Vector3.new(0,5,0))
+            task.wait(0.3) -- chờ một chút trước khi qua Coin_Spawn tiếp theo
         end
     end
 end
