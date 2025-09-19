@@ -65,9 +65,14 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1041.040
 ]])
 
 AddContent("TextButton", "TP RawMeat", [[
-local player = game.Players.LocalPlayer.Character
-local part = game.Workspace["RawMeatModel"]
-local part2 = game.Workspace["Part"]
-player.HumanoidRootPart.CFrame = part.CFrame
-wait(.2)
+local meat = workspace:FindFirstChild("RawMeatModel")
+if meat then
+    local part = meat:FindFirstChildWhichIsA("BasePart")
+    if part then
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        if LocalPlayer.Character and LocalPlayer.Character.PrimaryPart then
+            LocalPlayer.Character:PivotTo(part.CFrame + Vector3.new(0,5,0))
+        end
+    end
+end
 ]])
