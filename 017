@@ -66,7 +66,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1041.040
 
 AddContent("TextButton", "TP RawMeat", [[
 local player = game.Players.LocalPlayer.Character
-local part = game.Workspace["RawMeat"]
+local part = game.Workspace["RawMeatModel"]
 player.HumanoidRootPart.CFrame = part.CFrame
 wait(.2)
 ]])
