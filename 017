@@ -3,7 +3,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/UI-Lib
 game.CoreGui.GhostGui.MainFrame.Title.Text = "Zombie Survival V0.1"
 ---
 
-AddContent("Toogle", "Auto Kill Use UZI", [[
+AddContent("TextButton", "Auto Kill", [[
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 
