@@ -56,6 +56,10 @@ task.spawn(function()
 end)
 ]])
 
+AddContent("TextButton", "TP Power Up", [[
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(935.621887, 409.609528, -3333.6626, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+]])
+
 AddContent("TextButton", "TP Add Wood", [[
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(973.674438, 407.208954, -3369.55518, 0, 0, 1, 0, 1, -0, -1, 0, 0)
 ]])
@@ -106,3 +110,19 @@ for _, obj in ipairs(workspace:GetChildren()) do
     end
 end 
 ]])
+
+AddContent("TextButton", "TP Fuel", [[
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+for _, obj in ipairs(workspace:GetChildren()) do
+    if obj.Name:match("^Fuel_Spawn") then
+        local part = obj:FindFirstChildWhichIsA("BasePart") or obj
+        if part then
+            hrp.CFrame = part.CFrame + Vector3.new(0,5,0)
+        end
+    end
+end 
+]])
+
