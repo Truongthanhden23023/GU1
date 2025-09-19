@@ -31,7 +31,7 @@ end
 
 -- AutoZombie loop
 task.spawn(function()
-    while task.wait(0.05) do
+    while task.wait(0.015) do
         local folder = workspace:FindFirstChild("ZombiesAlive")
         if folder then
             for _, z in ipairs(folder:GetChildren()) do
